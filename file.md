@@ -8,9 +8,8 @@
 ### **Neural Network Basics**
 
 A neural network is a sequence of linear and non-linear transformations:
-$$
-a^{(l)} = f(z^{(l)}) \quad \text{where} \quad z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}
-$$
+
+$a^{(l)} = f(z^{(l)}) \quad \text{where} \quad z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}$
 
 * $a^{(0)} = x$: input
 * $W^{(l)}$: weights matrix
@@ -20,9 +19,7 @@ $$
 ### **Forward Propagation**
 
 Computes output step-by-step from input:
-$$
-z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}, \quad a^{(l)} = f(z^{(l)})
-$$
+$z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}, \quad a^{(l)} = f(z^{(l)})$
 Final layer output: $\hat{y} = f_{out}(z^{(L)})$
 
 ### **Loss Function**
@@ -50,14 +47,10 @@ $$
 ### **Backward Pass**
 
 Define error at layer (l):
-$$
-\delta^{(l)} = \frac{\partial L}{\partial z^{(l)}} = (W^{(l+1)})^T \delta^{(l+1)} \odot f'(z^{(l)})
-$$
+$\delta^{(l)} = \frac{\partial L}{\partial z^{(l)}} = (W^{(l+1)})^T \delta^{(l+1)} \odot f'(z^{(l)})$
 
 Then:
-$$
-\frac{\partial L}{\partial W^{(l)}} = \delta^{(l)} (a^{(l-1)})^T, \quad \frac{\partial L}{\partial b^{(l)}} = \delta^{(l)}
-$$
+$\frac{\partial L}{\partial W^{(l)}} = \delta^{(l)} (a^{(l-1)})^T, \quad \frac{\partial L}{\partial b^{(l)}} = \delta^{(l)}$
 
 ---
 
@@ -66,9 +59,7 @@ $$
 ### **Gradient Descent**
 
 Update rule:
-$$
-\theta \leftarrow \theta - \eta \nabla_\theta L
-$$
+$\theta \leftarrow \theta - \eta \nabla_\theta L$
 
 * **Batch GD**: uses all samples
 * **Stochastic GD (SGD)**: 1 sample per step
@@ -131,12 +122,9 @@ $$
 
 Handle sequences — output depends on previous time steps.
 
-$$
-h_t = f(W_{xh}x_t + W_{hh}h_{t-1} + b_h)
-$$
-$$
-\hat{y}*t = f*{out}(W_{hy}h_t + b_y)
-$$
+$h_t = f(W_{xh}x_t + W_{hh}h_{t-1} + b_h)$
+$\hat{y}*t = f*{out}(W_{hy}h_t + b_y)
+$
 
 ### **Types**
 
@@ -162,16 +150,14 @@ $$
 
 ### **Goal:** preserve long-term dependencies.
 
-$$
-\begin{aligned}
+$\begin{aligned}
 f_t &= \sigma(W_f [h_{t-1}, x_t] + b_f) &\text{(forget gate)}\
 i_t &= \sigma(W_i [h_{t-1}, x_t] + b_i) &\text{(input gate)}\
 \tilde{C}*t &= \tanh(W_C [h*{t-1}, x_t] + b_C) &\text{(candidate)}\
 C_t &= f_t \odot C_{t-1} + i_t \odot \tilde{C}*t &\text{(cell state)}\
 o_t &= \sigma(W_o [h*{t-1}, x_t] + b_o) &\text{(output gate)}\
 h_t &= o_t \odot \tanh(C_t)
-\end{aligned}
-$$
+\end{aligned$
 
 ✅ Prevents vanishing gradient with constant error flow via (C_t).
 
@@ -193,12 +179,8 @@ Used in **translation**, **summarization**, etc.
 
 Instead of one context, decoder attends to **all encoder states** with learned weights.
 
-$$
-\text{score}(s_t, h_i) = s_t^T W_a h_i
-$$
-$$
-\alpha_i = \text{softmax(score)} \quad ; \quad c_t = \sum_i \alpha_i h_i
-$$
+$\text{score}(s_t, h_i) = s_t^T W_a h_i$
+$\alpha_i = \text{softmax(score)} \quad ; \quad c_t = \sum_i \alpha_i h_i$
 Decoder then uses (c_t) to generate next token.
 
 ---
@@ -207,9 +189,7 @@ Decoder then uses (c_t) to generate next token.
 
 ### **Core formula**
 
-$$
-\text{Attention}(Q, K, V) = \text{softmax}\left( \frac{QK^T}{\sqrt{d_k}} \right) V
-$$
+$\text{Attention}(Q, K, V) = \text{softmax}\left( \frac{QK^T}{\sqrt{d_k}} \right) V$
 
 * (Q): query, (K): key, (V): value (from same sequence)
 * Computes relationships between all tokens.
@@ -220,26 +200,20 @@ Multiple parallel attentions → capture different relations.
 
 ### **Feed-forward block**
 
-$$
-\text{FFN}(x) = \max(0, xW_1 + b_1)W_2 + b_2
-$$
+$\text{FFN}(x) = \max(0, xW_1 + b_1)W_2 + b_2$
 
 ### **Add & Norm**
 
 Residual connection + Layer Normalization:
-$$
-x' = \text{LayerNorm}(x + \text{Sublayer}(x))
-$$
+$x' = \text{LayerNorm}(x + \text{Sublayer}(x))$
 
 ---
 
 ## 14️⃣ Positional Encoding
 
 Since Transformers lack recurrence:
-$$
-PE_{(pos,2i)} = \sin\left(\frac{pos}{10000^{2i/d}}\right), \quad
-PE_{(pos,2i+1)} = \cos\left(\frac{pos}{10000^{2i/d}}\right)
-$$
+$PE_{(pos,2i)} = \sin\left(\frac{pos}{10000^{2i/d}}\right), \quad
+PE_{(pos,2i+1)} = \cos\left(\frac{pos}{10000^{2i/d}}\right)$
 
 Adds sequence order information to embeddings.
 
@@ -313,9 +287,7 @@ Instead of connecting every input neuron to every output neuron (like MLPs), CNN
 
 ## 2️⃣ Convolution Operation
 
-$$
-z_{i,j}^{(k)} = (X * W^{(k)})_{i,j} + b^{(k)}
-$$
+$z_{i,j}^{(k)} = (X * W^{(k)})_{i,j} + b^{(k)}$
 
 * $X$: input image or feature map
 * $W^{(k)}$: filter (kernel) for feature map (k)
@@ -336,9 +308,7 @@ Each filter detects a feature (edges, colors, shapes…).
 
 If input size = $n \times n$, kernel size = $f$, stride = $s$, padding = $p$:
 
-$$
-n_{out} = \frac{n - f + 2p}{s} + 1
-$$
+$n_{out} = \frac{n - f + 2p}{s} + 1$
 
 ---
 
@@ -418,3 +388,4 @@ Important: derivative of convolution = convolution with flipped kernel.
 * Why use ReLU in CNNs?
 * What is learned in each filter?
 * Why does ResNet solve the vanishing gradient problem?
+
