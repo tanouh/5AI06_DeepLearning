@@ -8,9 +8,9 @@
 ### **Neural Network Basics**
 
 A neural network is a sequence of linear and non-linear transformations:
-$$
+$
 a^{(l)} = f(z^{(l)}) \quad \text{where} \quad z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}
-$$
+$
 
 * $a^{(0)} = x$: input
 * $W^{(l)}$: weights matrix
@@ -418,3 +418,4 @@ Important: derivative of convolution = convolution with flipped kernel.
 * Why use ReLU in CNNs?
 * What is learned in each filter?
 * Why does ResNet solve the vanishing gradient problem?
+
