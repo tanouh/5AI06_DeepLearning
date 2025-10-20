@@ -150,14 +150,22 @@ $
 
 ### **Goal:** preserve long-term dependencies.
 
-$\begin{aligned}
-f_t &= \sigma(W_f [h_{t-1}, x_t] + b_f) &\text{(forget gate)}\
-i_t &= \sigma(W_i [h_{t-1}, x_t] + b_i) &\text{(input gate)}\
-\tilde{C}*t &= \tanh(W_C [h*{t-1}, x_t] + b_C) &\text{(candidate)}\
-C_t &= f_t \odot C_{t-1} + i_t \odot \tilde{C}*t &\text{(cell state)}\
-o_t &= \sigma(W_o [h*{t-1}, x_t] + b_o) &\text{(output gate)}\
-h_t &= o_t \odot \tanh(C_t)
-\end{aligned$
+$f_t = \sigma(W_f [h_{t-1}, x_t] + b_f)$
+
+$(forget gate)
+i_t = \sigma(W_i [h_{t-1}, x_t] + b_i)$
+
+$(input gate)
+\tilde{C}*t = \tanh(W_C [h*{t-1}, x_t] + b_C)$
+
+$(candidate)
+C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}*t$
+
+$(cell state)
+o_t = \sigma(W_o [h*{t-1}, x_t] + b_o)$
+
+$ (output gate)
+h_t = o_t \odot \tanh(C_t)$
 
 ✅ Prevents vanishing gradient with constant error flow via (C_t).
 
@@ -388,4 +396,5 @@ Important: derivative of convolution = convolution with flipped kernel.
 * Why use ReLU in CNNs?
 * What is learned in each filter?
 * Why does ResNet solve the vanishing gradient problem?
+
 
